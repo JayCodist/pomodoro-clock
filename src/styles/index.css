@@ -1,0 +1,13 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+
+html
+{
+	padding: 0;
+	border: 0;
+	scroll-behavior: smooth;
+}
+body
+{
+	font-family: Raleway, segoe UI, sans-serif;
+	overflow-x: hidden;
+}
