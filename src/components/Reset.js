@@ -3,7 +3,7 @@ import React from 'react';
 
 export default props =>
 (
-	<button>
+	<div onClick={props.onClick}>
 		Reset
-	</button>
+	</div>
 )
