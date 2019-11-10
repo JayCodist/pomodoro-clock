@@ -3,7 +3,7 @@ import React from 'react';
 
 export default props =>
 (
-	<button>
-		Notifications
-	</button>
+	<div className={props.className} >
+		
+	</div>
 )

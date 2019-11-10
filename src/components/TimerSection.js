@@ -3,7 +3,7 @@ import Reset from './Reset.js';
 import Start from './Start.js';
 import Notifications from './Notifications.js';
 import Timer from './Timer.js';
-
+import '../styles/TimerSection.css';
 
 const styles = 
 {
@@ -11,6 +11,12 @@ const styles =
 	{
 		backgroundColor: 'darkorange',
 		transition: '0.4s ease-out',
+	},
+	timerControls:
+	{
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'center',
 	}
 }
 
@@ -26,10 +32,10 @@ export default props =>
 		</p>
 		<section id="timer-container">
 			<Timer />
-			<section id="timer-controls">
-				<Reset onClick={props.toggleFullScreen}/>
-				<Start />
-				<Notifications />
+			<section id="timer-controls" style={styles.timerControls} >
+				<Reset className="timer-controls-btn" />
+				<Start className="timer-controls-btn" />
+				<Notifications className="timer-controls-btn" />
 			</section>
 		</section>
 	</section>)

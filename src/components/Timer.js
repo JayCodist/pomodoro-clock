@@ -17,7 +17,7 @@ export default props =>
 	{
 		if (categoryValue === 0) return;
 		let progressMadeMain = Math.ceil((initialCategoryValue - (categoryValue - 1)) / initialCategoryValue * 360);
-		let progressMadeInner = Math.floor(360 - (categoryValue % 60) * 6);
+		let progressMadeInner = Math.ceil(360 - (categoryValue % 60) * 6);
 		
 		if (progressMadeMain > 180)
 			setIsSecondHalfMain(true);

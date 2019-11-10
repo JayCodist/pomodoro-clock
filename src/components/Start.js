@@ -3,7 +3,7 @@ import React from 'react';
 
 export default props =>
 (
-	<button>
-		Start
-	</button>
+	<div className={props.className} style={{height: '5rem', width: '5rem'}}>
+		
+	</div>
 )

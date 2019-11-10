@@ -1,0 +1,17 @@
+.timer-controls-btn
+{
+	align-self: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 4rem;
+	width: 4rem;
+	border: 2px solid rgba(255, 255, 255, 0.5);
+	border-radius: 100%;
+	margin: 1rem;
+	cursor: pointer;
+}
+.timer-controls-btn > *
+{
+	align-self: center;
+}
