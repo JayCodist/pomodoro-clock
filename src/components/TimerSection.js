@@ -22,6 +22,17 @@ const styles =
 
 export default props =>
 {
+	const { 
+		shouldAllowNotifs, 
+		shouldShowPlay,
+		togglePlayStatus,
+		toggleNotifStatus,
+		initialCategoryValue,
+		resetCategoryValue,
+		categoryValue,
+		setCategoryValue,
+		categoryName
+	} = props;
 	let width = props.isFullScreen ? '100%' : '60%';
 	return (
 	<section id="timer-section" style={{...styles.section, width: width}} >
@@ -31,11 +42,28 @@ export default props =>
 			Read more <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">here</a>
 		</p>
 		<section id="timer-container">
-			<Timer />
+			<Timer 
+				initialCategoryValue={initialCategoryValue}
+				categoryValue={categoryValue}
+				setCategoryValue={setCategoryValue}
+				categoryName={categoryName}
+				shouldPlay={!shouldShowPlay}
+			/>
 			<section id="timer-controls" style={styles.timerControls} >
-				<Reset className="timer-controls-btn" />
-				<Start className="timer-controls-btn" />
-				<Notifications className="timer-controls-btn" />
+				<Reset 
+					className="timer-controls-btn"
+					onClick={resetCategoryValue} 
+				/>
+				<Start 
+					className="timer-controls-btn"
+					shouldShowPlay={shouldShowPlay}
+					onClick={togglePlayStatus}
+				/>
+				<Notifications 
+					onClick={toggleNotifStatus}
+					className="timer-controls-btn"
+					shouldAllowNotifs={shouldAllowNotifs}
+				/>
 			</section>
 		</section>
 	</section>)

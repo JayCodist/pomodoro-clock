@@ -4,14 +4,18 @@ import '../styles/Timer.css';
 
 export default props =>
 {
-	const [categoryName, setCategoryName] = React.useState("Work");
-	const [initialCategoryValue, setInitialCategoryValue] = React.useState(1500);
-	const [categoryValue, setCategoryValue] = React.useState(initialCategoryValue);
 	const [shouldShowColon, setShouldShowColon] = React.useState(true);
 	const [rotateAngleMain, setRotateAngleMain] = React.useState(45);
 	const [isSecondHalfMain, setIsSecondHalfMain] = React.useState(false);
 	const [rotateAngleInner, setRotateAngleInner] = React.useState(45);
 	const [isSecondHalfInner, setIsSecondHalfInner] = React.useState(false);
+	const { 
+		categoryValue, 
+		setCategoryValue, 
+		initialCategoryValue,
+		categoryName,
+		shouldPlay
+	} = props;
 
 	const performCountdown = () =>
 	{
@@ -32,9 +36,9 @@ export default props =>
 		setCategoryValue(categoryValue - 1);
 	}
 
-	useInterval(() => performCountdown(), 1000);
+	useInterval(() => performCountdown(), shouldPlay ? 1000 : null);
 
-	useInterval(() => setShouldShowColon(!shouldShowColon), 500);
+	useInterval(() => setShouldShowColon(!shouldShowColon), shouldPlay ? 500 : null);
 
 	return (
 		<div id="countdown-container">

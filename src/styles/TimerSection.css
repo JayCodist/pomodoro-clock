@@ -6,12 +6,63 @@
 	justify-content: center;
 	height: 4rem;
 	width: 4rem;
-	border: 2px solid rgba(255, 255, 255, 0.5);
+	border: 2px solid rgba(255, 255, 255, 0.2);
 	border-radius: 100%;
 	margin: 1rem;
 	cursor: pointer;
+	transition: 0.4s ease-out;
+	position: relative;
+}
+.timer-controls-btn:hover
+{
+	border: 2px white solid;
+	background-color: rgba(255, 255, 255, 0.3);
+}
+.timer-controls-btn .tooltiptext 
+{
+	opacity: 0;
+	width: 120px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 12px;
+	border-radius: 6px;
+	left: -40%;
+	top: -10%;
+	overflow: hidden;
+
+	position: absolute;
+	z-index: 1;
+	transition: 0.4s ease;
+}
+.timer-controls-btn .tooltiptext::after
+{
+	content: " hdsg";
+	position: absolute;
+	left: 110%;
+	top: 110%;
+	border: 8px black solid;
+	border-color: transparent black transparent transparent;
+}
+.timer-controls-btn:hover .tooltiptext 
+{
+	opacity: 100;
+	top: -55%;
+}
+.timer-controls-btn .tooltiptext:hover
+{
+	opacity: 0;
+	top: -10%;
 }
 .timer-controls-btn > *
 {
 	align-self: center;
+	color: white;
+	font-size: 28px;
+	transform: scale(1.4);
+}
+#start-tooltip
+{
+	left: -20% !important;
 }
