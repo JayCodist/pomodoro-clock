@@ -19,7 +19,7 @@ export default props =>
 
 	const performCountdown = () =>
 	{
-		if (categoryValue === 0) return;
+		if (categoryValue <= 0) return;
 		let progressMadeMain = Math.ceil((initialCategoryValue - (categoryValue - 1)) / initialCategoryValue * 360);
 		let progressMadeInner = Math.ceil(360 - ((categoryValue - 1) % 60) * 6);
 		
@@ -42,6 +42,7 @@ export default props =>
 
 	useInterval(() => setShouldShowColon(!shouldShowColon), shouldPlay ? 500 : null);
 
+
 	return (
 		<div id="countdown-container">
 			<div id="outer-border">
@@ -53,7 +54,8 @@ export default props =>
 					</div>
 					<div 
 						className="arcs-main" 
-						style={{transform: `rotate(${rotateAngleMain}deg)`}} 
+						style={{transform: `rotate(${categoryValue === initialCategoryValue ? 
+							"45" : rotateAngleMain}deg)`}} 
 					>
 					</div>
 					<div 
@@ -72,7 +74,8 @@ export default props =>
 							className="arcs-inner" 
 							style={
 							{
-								transform: `rotate(${rotateAngleInner}deg)`, 
+								transform: `rotate(${categoryValue === initialCategoryValue ? 
+								"45" : rotateAngleInner}deg)`, 
 								transition: rotateAngleInner === 45 ? '0s linear' : '0s linear'
 							}} 
 						>
@@ -88,12 +91,32 @@ export default props =>
 						{/* Set fixed significant figures later or display figures as horizontal flex */}
 						<span id="category-value">
 							<span>{Math.floor(categoryValue / 60)}</span> 
-							<span style={{color: shouldShowColon ? 'inherit' : 'transparent'}} >:</span> 
-							<span>{categoryValue % 60}</span>
+							<span style={{color: shouldShowColon || !shouldPlay ? 'inherit' : 'transparent'}} >:</span> 
+							<span>{(categoryValue % 60).toString().padStart(2, '0')}</span>
 						</span>
 					</div>
 				</div>
 			</div>
 		</div>
 	)
+}
+
+if (!String.prototype.padStart) // Backward compatibility
+{
+    String.prototype.padStart = function padStart(targetLength, padString) 
+    {
+        targetLength = targetLength >> 0; //truncate if number, or convert non-number to 0;
+        padString = String(typeof padString !== 'undefined' ? padString : ' ');
+        if (this.length >= targetLength) {
+            return String(this);
+        } else {
+            targetLength = targetLength - this.length;
+            if (targetLength > padString.length) 
+            {
+            	//append to original to ensure we are longer than needed
+                padString += padString.repeat(targetLength / padString.length); 
+            }
+            return padString.slice(0, targetLength) + String(this);
+        }
+    };
 }
