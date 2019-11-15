@@ -56,3 +56,11 @@
 {
 	left: -20% !important;
 }
+
+@media (max-width: 860px)
+{
+	.timer-controls-btn
+	{
+		margin: 1rem;
+	}
+}

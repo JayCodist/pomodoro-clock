@@ -11,6 +11,8 @@ const styles =
 	{
 		backgroundColor: 'darkorange',
 		transition: '0.4s ease-out',
+		paddingTop: '1rem',
+		minHeight: '100vh',
 	},
 	timerControls:
 	{
@@ -20,15 +22,8 @@ const styles =
 	},
 	intro: 
 	{
-		fontSize: '40px',
-		margin: '2rem 2rem 0.5rem',
 		fontWeight: 'bold',
 	},
-	desc: 
-	{
-		fontSize: '18px',
-		marginLeft: '2rem',
-	}
 }
 
 export default props =>
@@ -42,13 +37,26 @@ export default props =>
 		resetCategoryValue,
 		categoryValue,
 		setCategoryValue,
-		categoryName
+		categoryName,
+		isFullScreen,
+		isMobile
 	} = props;
-	let width = props.isFullScreen ? '100%' : '60%';
+	let width = isMobile ? '100vw' : (isFullScreen ? '100%' : '60%');
+	let statefulIntroStyling = 
+	{
+		fontWeight: 'bold',
+		fontSize: isMobile ? '25px' : '40px',
+		margin: isMobile ? '0.5rem 1rem 0.5rem' : '1rem 2rem 0.5rem',
+	};
+	let statefulInfoStyling = 
+	{
+		fontSize: isMobile ? '14px' : '18px',
+		marginLeft: isMobile ? '1rem' : '2rem',
+	}
 	return (
 	<section id="timer-section" style={{...styles.section, width: width}} >
-		<h1 style={styles.intro}>Pomodoro Clock</h1>
-		<p style={styles.desc}>
+		<h1 style={statefulIntroStyling}>Pomodoro Clock</h1>
+		<p style={statefulInfoStyling}>
 			Manage your work time and breaks with convenience! <br />
 			Read more 
 			<a  

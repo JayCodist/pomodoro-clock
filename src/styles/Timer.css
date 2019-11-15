@@ -90,3 +90,11 @@
 	font-weight: 100;
 	font-family: segoe UI, sans-serif;
 }
+
+@media (max-width: 860px)
+{
+	#outer-border
+	{
+		margin: 1rem auto 0;
+	}
+}

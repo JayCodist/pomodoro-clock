@@ -6,10 +6,9 @@ const styles =
 	barsContainer:
 	{
 		position: 'fixed',
-		left: '90vw',
 	    top: '3vh',
 	    display: 'block',
-	    zIndex: '10',
+	    zIndex: '100',
 	    fontSize: '25px',
 	    cursor: 'pointer',
 	    lineHeight: '80px',
@@ -31,7 +30,13 @@ const styles =
 export default props => 
 {
 	const [isHover, setisHover] = React.useState(false);
-	const active = props.active;
+	const { active, isMobile } = props;
+
+	const statelyStyling = 
+	{
+		left: isMobile ? '80vw' : '90vw',
+	}
+
 	const animStyles =
 	{
 		stik1:
@@ -52,6 +57,7 @@ export default props =>
 		<div 
 			style={{
 				...styles.barsContainer, 
+				...statelyStyling,
 				backgroundColor: isHover ? 'rgb(10, 10, 10, 0.1)' : 'transparent',
 				boxShadow: isHover ? '0 0 2px 15px rgb(10, 10, 10, 0.1)' : '',
 			}}

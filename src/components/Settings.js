@@ -60,14 +60,13 @@ const styles =
 
 export default props =>
 {
-	const { currentCategory, categories, updateCategories, isFullScreen } = props;
+	const { currentCategory, categories, updateCategories, isFullScreen, isMobile } = props;
 	const [resetHover, setResetHover] = React.useState(false);
 	const [isWorkChanged, setIsWorkChanged] = React.useState(false);
 	const [isBreakChanged, setIsBreakChanged] = React.useState(false);
 	const [workValue, setWorkValue] = React.useState(categories.work.initialValue / 60);
 	const [breakValue, setBreakValue] = React.useState(categories.break.initialValue / 60);
 	const [workInProgress, setWorkInProgress] = React.useState(currentCategory.name === "Work");
-
 
 	const applyChanges = e =>
 	{
@@ -123,8 +122,16 @@ export default props =>
 		updateCategories(newCategories, newCategories[currentCategory.name.toLowerCase()]);
 	}
 
+	const statelyStyling =
+	{ 
+		width: isMobile ? '100vw' : (isFullScreen ? '0%' : '40%'),
+		position: isMobile ? 'fixed' : 'static',
+		left: isFullScreen ? '100vw' : '0vw',
+		top: '0',
+		zIndex: isMobile ? '50' : '1',
+	}
 	return (
-		<section style={{...styles.section, width: isFullScreen ? '0' : '40%'}} >
+		<section id="settings" style={{...styles.section, ...statelyStyling}} >
 			<Col style={styles.inputCol}>
 				<label style={styles.labelTopic}>Work Session</label>
 				<label style={styles.labelInfo}>

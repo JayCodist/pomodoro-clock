@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import TimerSection from './components/TimerSection.js';
 import Settings from './components/Settings.js';
 import Hamburger from './utils/Hamburger.js';
-import './styles/index.css'
+import './styles/index.css';
 
 const App = props => 
 {
@@ -17,6 +17,12 @@ const App = props =>
 	const [shouldAllowNotifs, setShouldAllowNotifs] = React.useState(true);
 	const [categoryValue, setCategoryValue] = React.useState(currentCategory.initialValue);
 	const [categoryName, setCategoryName] = React.useState(currentCategory.name);
+	const [isMobile, setIsMobile] = React.useState(window.screen.width <= 860);
+
+	React.useEffect(() =>
+	{
+		window.addEventListener('resize', () => setIsMobile(window.screen.width <= 860));
+	}, [])
 
 	const toggleFullScreen = () => setIsFullScreen(!isFullScreen);
 
@@ -57,8 +63,10 @@ const App = props =>
  			setCategoryValue={setCategoryValue}
  			categoryName={categoryName}
  			resetCategoryValue={() => changeCategoryValue(currentCategory.initialValue) }
+ 			isMobile={isMobile}
  		/>
  		<Hamburger 
+ 			isMobile={isMobile}
  			active={!isFullScreen} 
  			toggleFullScreen={toggleFullScreen}
  		/>
@@ -67,6 +75,7 @@ const App = props =>
  			categories={categories}
  			updateCategories={updateCategories}
  			currentCategory={currentCategory}
+ 			isMobile={isMobile}
  		/>
  	</main>);
 }
