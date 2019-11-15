@@ -99,6 +99,8 @@ export default props =>
 								fontSize: '12px', 
 								color: isPaused ? 'white' : 'transparent',
 								alignSelf: 'center',
+								transition: '0.4s ease-out',
+								margin: '0.2rem auto'
 							}}
 						>
 							<em>Paused</em>
