@@ -13,6 +13,9 @@ const styles =
 	    fontSize: '25px',
 	    cursor: 'pointer',
 	    lineHeight: '80px',
+	    padding: '0.5rem',
+	    borderRadius: '100%',
+	    transition: '0.2s ease-out'
 	},
 	stix:
 	{
@@ -27,6 +30,7 @@ const styles =
 
 export default props => 
 {
+	const [isHover, setisHover] = React.useState(false);
 	const active = props.active;
 	const animStyles =
 	{
@@ -45,7 +49,16 @@ export default props =>
 		}
 	}
 	return (
-		<div style={styles.barsContainer} onClick={props.toggleFullScreen} >
+		<div 
+			style={{
+				...styles.barsContainer, 
+				backgroundColor: isHover ? 'rgb(10, 10, 10, 0.1)' : 'transparent',
+				boxShadow: isHover ? '0 0 2px 15px rgb(10, 10, 10, 0.1)' : '',
+			}}
+			onClick={props.toggleFullScreen} 
+			onMouseEnter={() => setisHover(true)}
+			onMouseLeave={() => setisHover(false)}
+		>
 		    <div style={{...styles.stix, ...animStyles.stik1}} ></div>
 	        <div style={{...styles.stix, ...animStyles.stik2}} ></div>
 	        <div style={{...styles.stix, ...animStyles.stik3}} ></div>

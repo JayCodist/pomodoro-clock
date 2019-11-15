@@ -7,25 +7,22 @@ import './styles/index.css'
 
 const App = props => 
 {
+	const [categories, setCategories] = React.useState({
+		work: {name: "Work", initialValue: 1500},
+		break: {name: "Break", initialValue: 300}
+	});
+	const [currentCategory, setCurrentCategory] = React.useState(categories.work);
 	const [isFullScreen, setIsFullScreen] = React.useState(true);
-	const toggleFullScreen = () => setIsFullScreen(!isFullScreen);
 	const [shouldShowPlay, setShouldShowPlay] = React.useState(true);
 	const [shouldAllowNotifs, setShouldAllowNotifs] = React.useState(true);
-	const [initialCategoryValue, setInitialCategoryValue] = React.useState(1500);
-	const [categoryValue, setCategoryValue] = React.useState(initialCategoryValue);
-	const [categoryName, setCategoryName] = React.useState("Work");
+	const [categoryValue, setCategoryValue] = React.useState(currentCategory.initialValue);
+	const [categoryName, setCategoryName] = React.useState(currentCategory.name);
+
+	const toggleFullScreen = () => setIsFullScreen(!isFullScreen);
 
 	const togglePlayStatus = () =>
 	{
 		setShouldShowPlay(!shouldShowPlay);
-	}
-
-	const changeInitialCategoryValue = newValue =>
-	{
-		if (newValue > 0)
-			setInitialCategoryValue(newValue);
-		else
-			setInitialCategoryValue(45);
 	}
 
 	const changeCategoryValue = newValue =>
@@ -39,6 +36,14 @@ const App = props =>
 		setShouldAllowNotifs(!shouldAllowNotifs);
 	}
 
+	const updateCategories = (newCategories, newCurrentCategory) =>
+	{
+		setCategories(newCategories);
+		setCurrentCategory(newCurrentCategory);
+		setCategoryName(newCurrentCategory.name);
+		setCategoryValue(newCurrentCategory.initialValue);
+	}
+
 	return (
 	<main id="container">
  		<TimerSection 
@@ -47,11 +52,11 @@ const App = props =>
  			shouldShowPlay={shouldShowPlay}
  			toggleNotifStatus={toggleNotifStatus}
  			togglePlayStatus={togglePlayStatus}
- 			initialCategoryValue={initialCategoryValue}
+ 			initialCategoryValue={currentCategory.initialValue}
  			categoryValue={categoryValue}
  			setCategoryValue={setCategoryValue}
  			categoryName={categoryName}
- 			resetCategoryValue={() => changeCategoryValue(initialCategoryValue) }
+ 			resetCategoryValue={() => changeCategoryValue(currentCategory.initialValue) }
  		/>
  		<Hamburger 
  			active={!isFullScreen} 
@@ -59,6 +64,9 @@ const App = props =>
  		/>
  		<Settings
  			isFullScreen={isFullScreen}
+ 			categories={categories}
+ 			updateCategories={updateCategories}
+ 			currentCategory={currentCategory}
  		/>
  	</main>);
 }

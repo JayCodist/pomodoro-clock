@@ -21,10 +21,12 @@ export default props =>
 	{
 		if (categoryValue === 0) return;
 		let progressMadeMain = Math.ceil((initialCategoryValue - (categoryValue - 1)) / initialCategoryValue * 360);
-		let progressMadeInner = Math.ceil(360 - (categoryValue % 60) * 6);
+		let progressMadeInner = Math.ceil(360 - ((categoryValue - 1) % 60) * 6);
 		
 		if (progressMadeMain > 180)
 			setIsSecondHalfMain(true);
+		else
+			setIsSecondHalfMain(false);
 		if (progressMadeInner > 180)
 			setIsSecondHalfInner(true);
 		else
@@ -71,7 +73,7 @@ export default props =>
 							style={
 							{
 								transform: `rotate(${rotateAngleInner}deg)`, 
-								transition: rotateAngleInner === 45 ? '0s linear' : '1s linear'
+								transition: rotateAngleInner === 45 ? '0s linear' : '0s linear'
 							}} 
 						>
 						</div>
