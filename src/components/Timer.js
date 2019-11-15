@@ -20,7 +20,7 @@ export default props =>
 	const performCountdown = () =>
 	{
 		if (categoryValue <= 0) return;
-		let progressMadeMain = Math.ceil((initialCategoryValue - (categoryValue - 1)) / initialCategoryValue * 360);
+		let progressMadeMain = Math.floor((initialCategoryValue - (categoryValue - 1)) / initialCategoryValue * 360);
 		let progressMadeInner = Math.ceil(360 - ((categoryValue - 1) % 60) * 6);
 		
 		if (progressMadeMain > 180)
@@ -42,7 +42,7 @@ export default props =>
 
 	useInterval(() => setShouldShowColon(!shouldShowColon), shouldPlay ? 500 : null);
 
-
+	let isPaused = categoryValue !== initialCategoryValue && !shouldPlay;
 	return (
 		<div id="countdown-container">
 			<div id="outer-border">
@@ -76,7 +76,7 @@ export default props =>
 							{
 								transform: `rotate(${categoryValue === initialCategoryValue ? 
 								"45" : rotateAngleInner}deg)`, 
-								transition: rotateAngleInner === 45 ? '0s linear' : '0s linear'
+								transition: rotateAngleInner === 45 ? '0s linear' : '0.95s linear'
 							}} 
 						>
 						</div>
@@ -93,6 +93,15 @@ export default props =>
 							<span>{Math.floor(categoryValue / 60)}</span> 
 							<span style={{color: shouldShowColon || !shouldPlay ? 'inherit' : 'transparent'}} >:</span> 
 							<span>{(categoryValue % 60).toString().padStart(2, '0')}</span>
+						</span>
+						<span 
+							style={{
+								fontSize: '12px', 
+								color: isPaused ? 'white' : 'transparent',
+								alignSelf: 'center',
+							}}
+						>
+							<em>Paused</em>
 						</span>
 					</div>
 				</div>
