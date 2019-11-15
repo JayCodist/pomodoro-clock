@@ -68,6 +68,11 @@ export default props =>
 	const [breakValue, setBreakValue] = React.useState(categories.break.initialValue / 60);
 	const [workInProgress, setWorkInProgress] = React.useState(currentCategory.name === "Work");
 
+	React.useEffect(() =>
+	{
+		setWorkInProgress(currentCategory.name === "Work")
+	}, [currentCategory.name])
+
 	const applyChanges = e =>
 	{
 		if (e.target.name === 'work')

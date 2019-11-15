@@ -50,6 +50,15 @@ const App = props =>
 		setCategoryValue(newCurrentCategory.initialValue);
 	}
 
+	if (categoryValue <= 0)
+	{
+		// Sound alarm
+		let newCategory = ['work', 'break'].find(a => a !== currentCategory.name.toLowerCase());
+		setCurrentCategory(categories[newCategory]);
+		setCategoryName(categories[newCategory].name);
+		setCategoryValue(categories[newCategory].initialValue);
+	}
+
 	return (
 	<main id="container">
  		<TimerSection 
