@@ -58,6 +58,7 @@ export default props =>
 			onClick={props.toggleFullScreen} 
 			onMouseEnter={() => setisHover(true)}
 			onMouseLeave={() => setisHover(false)}
+			title={active ? "Close Settings sidebar" : "Open Settings sidebar"}
 		>
 		    <div style={{...styles.stix, ...animStyles.stik1}} ></div>
 	        <div style={{...styles.stix, ...animStyles.stik2}} ></div>
